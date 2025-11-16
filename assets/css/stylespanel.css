@@ -1,0 +1,581 @@
+/* ===================================
+   SISTEMA DE INSCRIPCIONES - ESTILOS
+   Color Principal: #1e40af
+   =================================== */
+
+/* Variables de colores */
+:root {
+  --color-principal: #1e40af;
+  --color-principal-hover: #1e3a8a;
+  --color-secundario: #3b82f6;
+  --color-exito: #10b981;
+  --color-advertencia: #f59e0b;
+  --color-peligro: #ef4444;
+  --color-texto: #1f2937;
+  --color-texto-claro: #6b7280;
+  --fondo-claro: #f9fafb;
+  --fondo-blanco: #ffffff;
+}
+
+/* Reset y estilos base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  color: var(--color-texto);
+  line-height: 1.6;
+
+  /* --- LÍNEAS AÑADIDAS PARA STICKY FOOTER --- */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ===================================
+   NAVEGACIÓN
+   =================================== */
+
+.navbar-custom {
+  background: var(--color-principal);
+  color: white;
+  padding: 20px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.navbar-subtitle {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.navbar-user {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ===================================
+   FORMULARIOS
+   =================================== */
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--color-texto);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.form-label .required {
+  color: var(--color-peligro);
+  margin-left: 2px;
+}
+
+.form-control,
+.form-select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.form-control:focus,
+.form-select:focus {
+  outline: none;
+  border-color: var(--color-principal);
+  box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+.form-control::placeholder {
+  color: #9ca3af;
+}
+
+/* Convertido grid-template-columns de fr a porcentajes */
+/* Grid de dos columnas para formularios */
+.form-row {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.form-row .form-group {
+  margin-bottom: 0;
+}
+
+/* ===================================
+   BOTONES
+   =================================== */
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--color-principal);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--color-principal-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+.btn-success {
+  background: var(--color-exito);
+  color: white;
+}
+
+.btn-success:hover {
+  background: #059669;
+}
+
+.btn-warning {
+  background: var(--color-advertencia);
+  color: #000;
+}
+
+.btn-warning:hover {
+  background: #d97706;
+}
+
+.btn-danger {
+  background: var(--color-peligro);
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #dc2626;
+}
+
+.btn-light {
+  background: #f8f9fa;
+  color: #000;
+  border: 1px solid #ddd;
+}
+
+.btn-light:hover {
+  background: #e9ecef;
+}
+
+.btn-cancel {
+  background: #6b7280;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background: #4b5563;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 14px;
+  margin: 2px;
+  white-space: nowrap;
+}
+
+/* ===================================
+   ALERTAS
+   =================================== */
+
+.alert {
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alert-success {
+  background-color: #d1fae5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.alert-danger {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.alert-warning {
+  background-color: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fde68a;
+}
+
+.btn-close {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.btn-close:hover {
+  opacity: 1;
+}
+
+/* ===================================
+   TABLAS
+   =================================== */
+
+.table-container {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 24px;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 0;
+  font-size: 14px;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.table thead {
+  background: var(--fondo-claro);
+}
+
+.table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  padding: 12px 6px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  font-size: 12px;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table td {
+  padding: 12px 6px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  border-bottom: 1px solid #e9ecef;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Anchos de columnas específicos en px */
+.table td:nth-child(1),
+.table th:nth-child(1) {
+  width: 50px;
+  max-width: 50px;
+}
+
+.table td:nth-child(3),
+.table th:nth-child(3) {
+  width: 90px;
+  max-width: 90px;
+}
+
+.table td:nth-child(4),
+.table th:nth-child(4) {
+  width: 90px;
+  max-width: 90px;
+}
+
+.table td:nth-child(8),
+.table th:nth-child(8) {
+  width: 110px;
+  max-width: 110px;
+}
+
+.table td:nth-child(10),
+.table th:nth-child(10) {
+  width: 130px;
+  max-width: 130px;
+  white-space: nowrap;
+}
+
+.table td:nth-child(7) {
+  text-transform: lowercase !important;
+  max-width: 180px;
+}
+
+.table td:nth-child(11),
+.table th:nth-child(11) {
+  position: sticky;
+  right: 0;
+  background: white;
+  white-space: nowrap;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.05);
+  min-width: 180px;
+  z-index: 10;
+}
+
+.table th:nth-child(11) {
+  background-color: #f8f9fa;
+}
+
+.table tbody tr:hover td:nth-child(11) {
+  background-color: #f8f9fa;
+}
+
+.table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+  position: relative;
+}
+
+/* ===================================
+   PAGINACIÓN
+   =================================== */
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  gap: 8px;
+  margin: 0;
+}
+
+.page-item .page-link {
+  padding: 8px 16px;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--color-principal);
+  transition: all 0.3s ease;
+}
+
+.page-item .page-link:hover {
+  background: var(--color-principal);
+  color: white;
+  border-color: var(--color-principal);
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d;
+  background-color: #f8f9fa;
+  border-color: #dee2e6;
+  cursor: not-allowed;
+}
+
+/* ===================================
+   PÁGINA DE EDICIÓN
+   =================================== */
+
+.edit-page-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #e0e7ff 0%, #f0f9ff 100%);
+  padding: 32px 16px;
+}
+
+.edit-card {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.edit-card-header {
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  color: white;
+  padding: 32px;
+  text-align: center;
+}
+
+.edit-card-header h2 {
+  margin: 0 0 8px 0;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.edit-card-header p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 16px;
+}
+
+.edit-card-body {
+  padding: 40px;
+}
+
+/* Footer de modales y formularios */
+.modal-footer {
+  padding: 24px 0;
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.modal-footer .btn {
+  padding: 12px 32px;
+  border-radius: 10px;
+  font-weight: 600;
+  min-width: 120px;
+}
+
+/* ===================================
+   UTILIDADES
+   =================================== */
+
+.container {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: var(--color-texto-claro);
+}
+
+.mt-4 {
+  margin-top: 24px;
+}
+
+.mb-4 {
+  margin-bottom: 24px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+/* ===================================
+   RESPONSIVE
+   =================================== */
+
+@media (max-width: 768px) {
+  /* Convertido grid-template-columns a 100% */
+  .form-row {
+    grid-template-columns: 100%;
+  }
+
+  .navbar-user {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .table-container {
+    padding: 16px;
+  }
+
+  .table {
+    font-size: 13px;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px 4px;
+  }
+
+  .edit-card-body {
+    padding: 24px;
+  }
+
+  .modal-footer {
+    flex-direction: column;
+  }
+
+  .modal-footer .btn {
+    width: 100%;
+  }
+}
+/* ===================================
+   STICKY FOOTER HELPER
+   (Hace que el contenido principal crezca)
+   =================================== */
+.container.mt-4 {
+  flex-grow: 1;
+}
+
+/* ===================================
+   MEJORA DE ESTILOS PARA TABS
+   (Personaliza las pestañas de Bootstrap)
+   =================================== */
+.nav-tabs {
+  border-bottom: 1px solid #dee2e6; /* Línea gris más sutil */
+  margin-bottom: 24px;
+}
+
+.nav-tabs .nav-link {
+  font-size: 17px;         /* Letra más grande */
+  font-weight: 600;        /* Letra más gruesa */
+  color: var(--color-texto-claro); /* Color de pestaña inactiva */
+  border: none;            /* Quitar bordes feos */
+  border-bottom: 4px solid transparent; /* Espacio para el indicador azul */
+  padding: 16px 24px;
+  transition: all 0.2s ease;
+}
+
+.nav-tabs .nav-link:hover {
+  color: var(--color-texto); /* Color al pasar el mouse */
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--color-principal); /* Color azul primario */
+  border-bottom-color: var(--color-principal); /* Línea azul activa */
+  background-color: transparent;
+}
