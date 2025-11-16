@@ -1,6 +1,6 @@
 <?php
 
-class UsuariosModel {
+class UsuarioModel {
     private $conn;
 
     public function __construct($db_connection) {
@@ -8,13 +8,12 @@ class UsuariosModel {
     }
 
     public function listarUsuarios() {
-        $sql = "SELECT id, usuario, rol FROM usuario";
+        $sql = "SELECT id, usuario, rol FROM usuarios";
         $result = $this->conn->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     public function registrarUsuario($usuario, $password, $rol = 'comun') {
-        // Hash de la contraseña
         $password_hashed = password_hash($password, PASSWORD_DEFAULT);
     
         $stmt = $this->conn->prepare("INSERT INTO usuarios (usuario, password, rol) VALUES (?, ?, ?)");
@@ -25,7 +24,7 @@ class UsuariosModel {
     
 
     public function obtenerUsuario($usuario) {
-        $stmt = $this->conn->prepare("SELECT id, usuario, password, rol FROM usuario WHERE usuario = ?");
+        $stmt = $this->conn->prepare("SELECT id, usuario, password, rol FROM usuarios WHERE usuario = ?");
         $stmt->bind_param("s", $usuario);
         $stmt->execute();
         return $stmt->get_result()->fetch_assoc();

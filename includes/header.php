@@ -54,7 +54,7 @@ require_once __DIR__ . '/config.php';
                 </li>
                 <?php if (!empty($_SESSION['usuario'])): ?>
         <li class="nav-item">
-            <a href="<?php echo ADMIN_URL; ?>index.php?accion=bebidas" class="nav-link">Panel de Control</a>
+            <a href="<?php echo ADMIN_URL; ?>index.php?accion=inscripciones" class="nav-link">Panel de Control</a>
         </li>
     <?php endif; ?>
         <li>
