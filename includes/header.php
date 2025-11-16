@@ -60,7 +60,7 @@ require_once __DIR__ . '/config.php';
         <li>
         <?php if (!empty($_SESSION['usuario'])): ?>
         <span class="user-saludo"> Bienvenido, <strong><?= htmlspecialchars($_SESSION['usuario']) ?></strong></span>
-        <a href="<?php echo ADMIN_URL; ?>index.php?accion=logout" class="btn-auth">Cerrar Sesión</a>
+        <a href="<?php echo ADMIN_URL; ?>index.php?accion=logout&referrer=<?php echo urlencode((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); ?>" class="btn-auth">Cerrar Sesión</a>
     <?php else: ?>
         <a href="<?php echo ADMIN_URL; ?>index.php?accion=login&referrer=<?php echo urlencode((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); ?>" class="btn-auth">Iniciar Sesión</a>
     <?php endif; ?>

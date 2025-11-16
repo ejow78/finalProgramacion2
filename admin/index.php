@@ -55,6 +55,19 @@ switch ($accion) {
         break;
 
 
+    case 'formulario_inscripcion': // <-- NUEVO
+        $controller = new InscripcionController($conn);
+        $controller->formulario();
+        break;
+    case 'guardar_inscripcion': // <-- NUEVO
+        $controller = new InscripcionController($conn);
+        $controller->guardar();
+        break;
+
+    // --- Rutas de Mensajes ---
+    case 'mensajes':
+    // ...
+
     case 'mensajes':
         $controller = new MensajeController($conn);
         $controller->listar();
