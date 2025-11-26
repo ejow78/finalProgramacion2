@@ -7,7 +7,7 @@ $rol = $_SESSION['rol'] ?? 'comun';
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Gestión de Exámenes</title>
+    <title>Panel - Exámenes</title>
     <link rel="stylesheet" href="<?php echo ADMIN_URL; ?>estilos.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -85,7 +85,7 @@ $rol = $_SESSION['rol'] ?? 'comun';
 <div class="container">
     <div class="header">
     <div class="header-top">
-        <h2>Gestión llamados</h2>
+        <h2>Gestión Mesas de Exámenes</h2>
         <div class="header-actions">
             <span class="user-badge"><i class="fas fa-user-circle"></i> <?= htmlspecialchars($_SESSION['usuario'] ?? 'Admin') ?></span>
             <a href="<?php echo BASE_URL; ?>index.php" class="btn-dark" target="_blank">Ver Sitio</a>
