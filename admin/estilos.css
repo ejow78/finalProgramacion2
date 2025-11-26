@@ -121,3 +121,21 @@ p {
     margin-top: 10px;
     font-size: 0.9em;
 }
+
+@media (max-width: 600px) {
+    .container {
+        /* El contenedor ocupará casi toda la pantalla, con un pequeño margen */
+        width: 90%; 
+        /* Reducimos el margen superior */
+        margin: 20px auto; 
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.5em; /* Achicamos un poco el título */
+    }
+
+    button {
+        padding: 12px; /* Botón un poco más grande para el tacto */
+    }
+}

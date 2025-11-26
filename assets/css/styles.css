@@ -1471,6 +1471,21 @@ body {
 @media (max-width: 768px) {
   .header {
     padding: 24px 0;
+    
+  }
+  /* --- AÑADE ESTO --- */
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px; /* Reduce el espacio */
+  }
+
+  .header-logo {
+    height: 60px; /* Logo más pequeño */
+  }
+
+  .header-text h1 {
+    font-size: 28px; /* Texto más pequeño */
   }
 
   .mobile-toggle {
@@ -1513,6 +1528,8 @@ body {
 
   .dropdown-menu {
     position: static;
+    max-height: 0;
+    overflow: hidden;
     opacity: 1;
     visibility: visible;
     transform: none;
@@ -1520,6 +1537,16 @@ body {
     border: none;
     background: var(--bg-secondary);
     margin-top: 16px;
+    transition: max-height 0.3s ease;
+  }
+
+  .dropdown-menu.active {
+    max-height: 1000px; /* Un valor alto para animar la apertura */
+  }
+
+  /* Gira la flecha (chevron) cuando está activo */
+  .nav-link.active-dropdown i {
+    transform: rotate(180deg);
   }
 
   .carousel-content {

@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Close mobile menu when clicking on links
-  const navLinks = document.querySelectorAll(".nav-link")
+  const navLinks = document.querySelectorAll(".nav-item:not(.dropdown) .nav-link, .dropdown-link")
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
       if (window.innerWidth <= 768) {
@@ -31,6 +31,23 @@ document.addEventListener("DOMContentLoaded", () => {
       navbar.classList.remove("scrolled")
     }
   })
+
+  const dropdownLinks = document.querySelectorAll(".nav-menu .dropdown .nav-link");
+
+  dropdownLinks.forEach(link => {
+    link.addEventListener("click", function(e) {
+      // Previene que el enlace de "Carreras" o "Gestión" navegue
+      e.preventDefault(); 
+
+      // Busca el siguiente elemento (el .dropdown-menu)
+      const dropdownMenu = this.nextElementSibling;
+      // Alterna la clase 'active' para abrir/cerrar
+      dropdownMenu.classList.toggle("active");
+
+      // Alterna la clase en el link para girar la flecha
+      this.classList.toggle("active-dropdown");
+    });
+  });
 
   // Carousel functionality
   const carousel = document.getElementById("carousel")
