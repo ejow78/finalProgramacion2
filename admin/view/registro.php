@@ -6,6 +6,9 @@ $error = $_SESSION['error'] ?? '';
 unset($_SESSION['error']);
 $success = $_SESSION['success'] ?? '';
 unset($_SESSION['success']);
+
+// Para acceder a ADMIN_URL
+require_once __DIR__ . '/../../includes/config.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -25,7 +28,8 @@ unset($_SESSION['success']);
     <?php if (!empty($success)): ?>
         <div class="success"><?= htmlspecialchars($success) ?></div>
         <script>
-            setTimeout(() => { window.location.href = 'login.php'; }, 3000);
+            // La redirección aquí parece estar diseñada para ir a 'login.php', la cambio para que use el index.
+            setTimeout(() => { window.location.href = '<?php echo ADMIN_URL; ?>index.php?accion=login'; }, 3000);
         </script>
     <?php endif; ?>
 
@@ -37,7 +41,7 @@ unset($_SESSION['success']);
         <button type="submit">Registrarse</button>
     </form>
 
-    <p>¿Ya tenés cuenta? <a href="login.php">Iniciá sesión aquí</a></p>
+    <p>¿Ya tenés cuenta? <a href="<?php echo ADMIN_URL; ?>index.php?accion=login">Iniciá sesión aquí</a></p>
 </div>
 </body>
 </html>

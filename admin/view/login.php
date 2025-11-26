@@ -2,11 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$error = $_SESSION['error'] ?? '';
-unset($_SESSION['error']);
-$success = $_SESSION['success'] ?? '';
-unset($_SESSION['success']);
-
+// ... (código PHP sin cambios)
 
 $referrer = $_GET['referrer'] ?? '';
 ?>
@@ -44,6 +40,9 @@ $referrer = $_GET['referrer'] ?? '';
         <a href="#" onclick="this.previousElementSibling.src='<?php echo ADMIN_URL; ?>helpers/captcha.php?'+Math.random(); return false;">Recargar captcha</a>
 
         <button type="submit">Ingresar</button>
+        
+        <p>¿No tenés una cuenta? <a href="<?php echo ADMIN_URL; ?>index.php?accion=registrar">Registrate aquí</a></p>
+        
     </form>
 </div>
 </body>
