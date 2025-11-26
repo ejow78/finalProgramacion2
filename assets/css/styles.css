@@ -1768,3 +1768,68 @@ body {
     color: var(--primary);
     white-space: nowrap;
 }
+
+/* --- Estilos Públicos Tabla Exámenes --- */
+.exam-table-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 40px;
+}
+
+.exam-header {
+    background: var(--primary);
+    color: white;
+    padding: 15px 25px;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.exam-year {
+    background: rgba(255,255,255,0.2);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.tabla-examenes {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-examenes th {
+    background-color: #f1f5f9;
+    color: #1f2937;
+    font-weight: 600;
+    padding: 12px 20px;
+    text-align: left;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.tabla-examenes td {
+    padding: 12px 20px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #4b5563;
+}
+
+.date-cell {
+    font-weight: 700;
+    color: var(--primary);
+    background-color: #f8fafc;
+    border-right: 1px solid #e2e8f0;
+    width: 120px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .tabla-examenes th { display: none; }
+    .tabla-examenes tr { display: block; border-bottom: 2px solid #e2e8f0; margin-bottom: 10px; }
+    .tabla-examenes td { display: block; text-align: right; padding: 8px 15px; border: none; position: relative; }
+    .tabla-examenes td::before { content: attr(data-label); position: absolute; left: 15px; font-weight: 600; color: #64748b; }
+    .date-cell { text-align: right; background: none; color: var(--primary); width: 100%; border: none; }
+}

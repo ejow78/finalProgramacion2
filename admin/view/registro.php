@@ -6,8 +6,6 @@ $error = $_SESSION['error'] ?? '';
 unset($_SESSION['error']);
 $success = $_SESSION['success'] ?? '';
 unset($_SESSION['success']);
-
-// Para acceder a ADMIN_URL
 require_once __DIR__ . '/../../includes/config.php';
 ?>
 <!DOCTYPE html>
@@ -18,17 +16,15 @@ require_once __DIR__ . '/../../includes/config.php';
     <link rel="icon" type="image/jpeg" href="<?php echo ADMIN_URL; ?>img/bebidas.jpg">
     <link rel="stylesheet" href="<?php echo ADMIN_URL; ?>estilos.css">
 </head>
-<body>
-<div class="container">
-    <h2>Registrarse</h2>
+<body class="auth-body">
+<div class="login-container"> <h2 style="text-align:center; margin-bottom:30px;">Registrarse</h2>
 
     <?php if (!empty($error)): ?>
-        <div class="error"><?= htmlspecialchars($error) ?></div>
+        <div class="alert-error"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
     <?php if (!empty($success)): ?>
-        <div class="success"><?= htmlspecialchars($success) ?></div>
+        <div class="alert-success"><?= htmlspecialchars($success) ?></div>
         <script>
-            // La redirección aquí parece estar diseñada para ir a 'login.php', la cambio para que use el index.
             setTimeout(() => { window.location.href = '<?php echo ADMIN_URL; ?>index.php?accion=login'; }, 3000);
         </script>
     <?php endif; ?>
@@ -36,12 +32,14 @@ require_once __DIR__ . '/../../includes/config.php';
     <form action="<?php echo ADMIN_URL; ?>index.php?accion=registrar" method="POST">
         <label>Usuario:</label>
         <input type="text" name="usuario_registro" placeholder="Crear usuario" required>
+        
         <label>Contraseña:</label>
         <input type="password" name="password_registro" placeholder="Crear contraseña" required pattern=".{4,}" title="Mínimo 4 caracteres">
+        
         <button type="submit">Registrarse</button>
     </form>
 
-    <p>¿Ya tenés cuenta? <a href="<?php echo ADMIN_URL; ?>index.php?accion=login">Iniciá sesión aquí</a></p>
+    <p style="text-align:center; margin-top:20px;">¿Ya tenés cuenta? <a href="<?php echo ADMIN_URL; ?>index.php?accion=login">Iniciá sesión aquí</a></p>
 </div>
 </body>
 </html>

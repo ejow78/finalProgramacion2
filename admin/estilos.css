@@ -1,3 +1,7 @@
+/* =========================================
+   ESTILOS PANEL ADMINISTRACIÓN (LIMPIO)
+   ========================================= */
+
 /* Variables */
 :root {
   --primary: #1e40af;
@@ -12,7 +16,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
 body { background-color: var(--bg); color: var(--text); line-height: 1.6; padding: 20px; }
 
-/* Contenedor Principal */
+/* --- LAYOUT PRINCIPAL (PANEL) --- */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -20,54 +24,102 @@ body { background-color: var(--bg); color: var(--text); line-height: 1.6; paddin
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
-    margin-bottom: 40px; /* Separación inferior */
+    margin-bottom: 40px;
 }
 
-/* Header y Navegación */
-/* --- Header y Navegación --- */
+/* --- LOGIN Y REGISTRO (CARTA CENTRADA) --- */
+.auth-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e0e7ff 0%, #f0f9ff 100%);
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 420px; /* Ancho fijo para login */
+    background: var(--white);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+    margin: 0 auto;
+}
+
+/* Estilos para Captcha en Login */
+.captcha-wrapper {
+    margin-bottom: 24px;
+}
+.captcha-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+    background: #f8fafc;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.captcha-box img {
+    border-radius: 4px;
+    height: 50px; /* Aumentado de 40px a 50px */
+    width: auto;  /* Permite que el ancho se ajuste automáticamente */
+    border: 1px solid #e2e8f0; /* Borde sutil para definir la imagen */
+}
+
+.captcha-box a {
+    font-size: 14px; /* Texto de "Recargar" un poco más grande también */
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+.captcha-box a:hover { text-decoration: underline; }
+
+
+/* --- HEADER Y NAVEGACIÓN --- */
 .header {
     display: flex;
-    flex-direction: column; /* Organiza elementos en columna (arriba y abajo) */
+    flex-direction: column;
     gap: 20px;
     margin-bottom: 30px;
     padding-bottom: 20px;
     border-bottom: 1px solid #e5e7eb;
 }
 
-/* Fila Superior: Título a la izq, Acciones a la derecha */
 .header-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .header h2 {
     color: var(--primary);
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
     margin: 0;
 }
 
-/* Contenedor de botones de usuario (derecha) */
 .header-actions {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-/* Fila Inferior: Pestañas de navegación */
 .header-tabs {
     display: flex;
     gap: 10px;
     padding-top: 5px;
+    flex-wrap: wrap;
 }
 
-/* --- Estilos de Botones Específicos (Estilo Imagen) --- */
-
-/* Botón Ver Sitio (Oscuro) */
+/* --- BOTONES Y ENLACES --- */
 .btn-dark {
-    background-color: #1f2937; /* Gris oscuro */
+    background-color: #1f2937;
     color: white;
     text-decoration: none;
     padding: 8px 16px;
@@ -78,9 +130,8 @@ body { background-color: var(--bg); color: var(--text); line-height: 1.6; paddin
 }
 .btn-dark:hover { background-color: #111827; }
 
-/* Botón Salir (Rojo) */
 .btn-danger {
-    background-color: #ef4444; /* Rojo */
+    background-color: #ef4444;
     color: white;
     text-decoration: none;
     padding: 8px 16px;
@@ -91,42 +142,52 @@ body { background-color: var(--bg); color: var(--text); line-height: 1.6; paddin
 }
 .btn-danger:hover { background-color: #dc2626; }
 
-/* Pestañas (Tabs) */
+.btn-secondary {
+    background-color: #ffffff;
+    color: #64748b;
+    border: 1px solid #cbd5e1;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.btn-secondary:hover {
+    background-color: #f1f5f9;
+    color: #334155;
+    border-color: #94a3b8;
+    transform: translateY(-1px);
+}
+
+.btn-save {
+    padding: 10px 24px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Pestañas */
 .tab-link {
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 6px;
     color: #4b5563;
-    background-color: #f3f4f6; /* Gris claro por defecto */
+    background-color: #f3f4f6;
     font-weight: 500;
     font-size: 14px;
     transition: all 0.2s;
 }
-
-.tab-link:hover {
-    background-color: #e5e7eb;
-    color: #1f2937;
-}
-
+.tab-link:hover { background-color: #e5e7eb; color: #1f2937; }
 .tab-link.active {
-    background-color: var(--primary); /* Azul activo */
+    background-color: var(--primary);
     color: white;
     box-shadow: 0 4px 6px -1px rgba(30, 64, 175, 0.2);
 }
 
-/* Badge de Usuario */
-.user-badge {
-    background-color: #dbeafe;
-    color: #1e40af;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-/* Badge de Usuario Logueado */
 .user-badge {
     background-color: #dbeafe;
     color: #1e40af;
@@ -141,84 +202,161 @@ body { background-color: var(--bg); color: var(--text); line-height: 1.6; paddin
     margin-right: 10px;
 }
 
-/* Botones y Acciones */
-.btn-action-container {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: flex-end; /* Alinea botones a la derecha */
-}
+/* --- FORMULARIOS GENERALES --- */
+form { width: 100%; }
+form.form-narrow { max-width: 600px; margin-top: 30px; }
 
-.btn-new {
-    background-color: #10b981;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 6px;
+label {
+    display: block;
+    margin-bottom: 6px;
     font-weight: 600;
-    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
-    display: inline-block;
+    color: var(--text);
+    font-size: 14px;
 }
-.btn-new:hover { background-color: #059669; transform: translateY(-1px); }
 
-/* Tablas */
+input, select, textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    background: #fff;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+textarea { resize: vertical; min-height: 120px; font-family: monospace; }
+
+button[type="submit"] {
+    background-color: var(--primary);
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s;
+    width: 100%;
+}
+button[type="submit"]:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.form-section-title {
+    color: var(--primary);
+    margin: 20px 0 15px 0;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.select-highlight {
+    background-color: #f0f9ff;
+    border-color: #bae6fd;
+    font-weight: 500;
+}
+
+.form-actions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.link-cancel { color: #64748b; text-decoration: none; font-size: 14px; }
+.link-cancel:hover { color: #334155; text-decoration: underline; }
+
+
+/* --- TABLAS --- */
 table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 10px; font-size: 14px; }
 th { background-color: #f8fafc; color: var(--text); font-weight: 600; text-align: left; padding: 16px; border-bottom: 2px solid var(--border); }
 td { padding: 16px; border-bottom: 1px solid var(--border); vertical-align: middle; }
 tr:last-child td { border-bottom: none; }
 tr:hover { background-color: #f9fafb; }
 
-/* Formularios */
-form { max-width: 800px; margin: 0 auto; }
-label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text); }
-input, select, textarea {
-    width: 100%; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px;
-    margin-bottom: 24px; font-size: 15px; background: #fff;
-}
-input:focus, select:focus, textarea:focus {
-    outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
-}
-textarea { resize: vertical; min-height: 150px; font-family: monospace; }
-
-button[type="submit"] {
-    background-color: var(--primary); color: white; padding: 14px 28px; border: none;
-    border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 16px;
-    transition: background 0.2s; width: 100%;
-}
-button[type="submit"]:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
-
-/* Alertas */
-.alert-success { background: #dcfce7; color: #166534; padding: 16px; border-radius: 8px; margin-bottom: 24px; border: 1px solid #bbf7d0; }
-.alert-error { background: #fee2e2; color: #991b1b; padding: 16px; border-radius: 8px; margin-bottom: 24px; border: 1px solid #fecaca; }
-
-/* Enlaces de Acción en Tablas */
-.actions-cell a {
-    text-decoration: none;
-    font-weight: 500;
-    margin-right: 12px;
-}
+.actions-cell a { text-decoration: none; font-weight: 500; margin-right: 12px; }
 .actions-cell a.edit { color: var(--primary); }
 .actions-cell a.delete { color: #ef4444; }
 .actions-cell a:hover { text-decoration: underline; }
 
-/* Login Container */
-.login-container { max-width: 400px; margin: 60px auto; padding: 40px; background: white; border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); }
-/* Agrega esto al final de tu admin/estilos.css */
 
+/* --- ALERTAS --- */
+.alert-success { background: #dcfce7; color: #166534; padding: 16px; border-radius: 8px; margin-bottom: 24px; border: 1px solid #bbf7d0; }
+.alert-error { background: #fee2e2; color: #991b1b; padding: 16px; border-radius: 8px; margin-bottom: 24px; border: 1px solid #fecaca; }
+
+
+/* --- GESTIÓN DE EXÁMENES (Formulario Dinámico) --- */
 .turno-wrapper {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    position: relative;
     transition: all 0.3s ease;
 }
-.turno-wrapper:hover {
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+.turno-wrapper:hover { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+
+.btn-remove-turno {
+    position: absolute; top: 20px; right: 20px;
+    background: #ef4444; color: white; border: none;
+    padding: 6px 12px; border-radius: 4px; cursor: pointer;
+    font-size: 13px; font-weight: 500;
+}
+.btn-remove-turno:hover { background: #dc2626; }
+
+.form-row-header { display: grid; grid-template-columns: 3fr 1fr; gap: 20px; margin-bottom: 15px; }
+
+.examenes-list { background: white; border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden; }
+
+.examen-header-row {
+    display: grid; grid-template-columns: 150px 2fr 2fr 40px; gap: 10px; padding: 10px;
+    background: #f1f5f9; font-weight: 600; font-size: 13px; color: #475569; border-bottom: 1px solid #e2e8f0;
 }
 
-.btn-remove-row:hover {
-    background-color: #fee2e2;
-    border-radius: 50%;
+.examen-row {
+    display: grid; grid-template-columns: 150px 2fr 2fr 40px; gap: 10px; padding: 10px;
+    border-bottom: 1px solid #f1f5f9; align-items: center;
 }
+.examen-row:last-child { border-bottom: none; }
+.examen-row input { margin-bottom: 0; padding: 8px; font-size: 14px; }
 
-/* Mejora inputs dentro de la tabla dinámica */
-.examen-row input {
-    margin-bottom: 0; /* Quitar margen inferior dentro de la tabla */
-    padding: 8px;
-    font-size: 14px;
+.btn-add-examen {
+    margin-top: 10px; background: #3b82f6; color: white; border: none;
+    padding: 8px 15px; border-radius: 4px; cursor: pointer; font-size: 13px;
+    display: inline-flex; align-items: center; gap: 5px;
+}
+.btn-add-examen:hover { background: #2563eb; }
+
+.btn-remove-row {
+    color: #ef4444; background: none; border: none; cursor: pointer; font-size: 16px;
+    display: flex; align-items: center; justify-content: center; width: 30px; height: 30px;
+    transition: background 0.2s;
+}
+.btn-remove-row:hover { background-color: #fee2e2; border-radius: 50%; }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header-top { flex-direction: column; align-items: flex-start; }
+    .header-actions { width: 100%; justify-content: space-between; margin-top: 10px; }
+    .form-row { grid-template-columns: 100%; }
+    .login-container { margin: 20px auto; padding: 25px; width: 95%; }
 }

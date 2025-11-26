@@ -23,7 +23,7 @@ function traducirInteres($valor) {
         <h2>Mensajes</h2>
         <div class="header-actions">
             <span class="user-badge"><i class="fas fa-user-circle"></i> <?= htmlspecialchars($usuario_actual) ?></span>
-            <a href="<?php echo BASE_URL; ?>index.php" class="btn-dark" target="_blank">Ver Sitio</a>
+            <a href="<?php echo BASE_URL; ?>index.php" class="btn-dark" target="_blank">Volver al Sitio</a>
             <a href="<?php echo ADMIN_URL; ?>index.php?accion=logout" class="btn-danger">Salir</a>
         </div>
     </div>

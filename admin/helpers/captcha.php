@@ -3,8 +3,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$width = 120;
-$height = 40;
+$width = 160;
+$height = 50;
 $image = imagecreatetruecolor($width, $height);
 
 $bg = imagecolorallocate($image, 255, 255, 255);
@@ -21,11 +21,13 @@ for ($i=0; $i<5; $i++){
 
 $_SESSION['captcha'] = $captcha_code;
 
-for ($i=0; $i<5; $i++){
-    imageline($image, 0, rand() % $height, $width, rand() % $height, $line_color);
+for ($i=0; $i<8; $i++){
+    imageline($image, rand(0, $width), rand(0, $height), rand(0, $width), rand(0, $height), $line_color);
 }
+$x = ($width - (strlen($captcha_code) * 9)) / 2;
+$y = ($height - 15) / 2;
 
-imagestring($image, 5, 10, 10, $captcha_code, $txt_color);
+imagestring($image, 5, $x, $y, $captcha_code, $txt_color);
 
 header("Content-type: image/png");
 imagepng($image);
