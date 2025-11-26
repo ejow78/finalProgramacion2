@@ -9,42 +9,61 @@ class ExamenController {
     }
 
     public function formulario() {
-        // Carga todos los turnos existentes
         $data = $this->examenModel->obtenerTurnos();
-        // $turnos ahora es un array
-        $turnos = $data['turnos']; 
+        // Pasamos toda la data de turnos a la vista
+        $turnos = $data['turnos'] ?? [];
         include __DIR__ . '/../view/examenes/form.php';
     }
 
     public function guardar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Recibe los datos como arrays de turnos
-            $titulos = $_POST['titulo'] ?? [];
-            $contenidos = $_POST['contenido'] ?? [];
-            $turnos_a_guardar = [];
+            // Recibimos el array crudo de turnos desde el formulario dinámico
+            $turnos_input = $_POST['turnos'] ?? [];
 
-            // Reconstruye el array de turnos
-            foreach ($titulos as $index => $titulo) {
+            $turnos_a_guardar = [];
+            
+            // Procesamos y limpiamos los datos
+            foreach ($turnos_input as $index => $t) {
+                // Solo guardamos si tiene título
+                if (empty($t['titulo'])) continue;
+
+                $examenes_limpios = [];
+                if (isset($t['examenes']) && is_array($t['examenes'])) {
+                    foreach ($t['examenes'] as $ex) {
+                        // Guardamos el examen si tiene al menos materia o fecha
+                        if (!empty($ex['materia']) || !empty($ex['fecha'])) {
+                            $examenes_limpios[] = [
+                                'fecha' => $ex['fecha'] ?? '',
+                                'materia' => $ex['materia'] ?? '',
+                                'tribunal' => $ex['tribunal'] ?? ''
+                            ];
+                        }
+                    }
+                    
+                    // Ordenamos los exámenes por fecha para que salgan ordenados en la web
+                    usort($examenes_limpios, function($a, $b) {
+                        return strcmp($a['fecha'], $b['fecha']);
+                    });
+                }
+
                 $turnos_a_guardar[] = [
-                    'id' => $index + 1, // Usar index + 1 como ID simple
-                    'titulo' => $titulo,
-                    'contenido' => $contenidos[$index] ?? ''
+                    'id' => $index + 1,
+                    'titulo' => $t['titulo'],
+                    'anio' => $t['anio'] ?? date('Y'), // Guardamos el año
+                    'examenes' => $examenes_limpios // Guardamos la lista de exámenes, no HTML
                 ];
             }
-            
-            // Verifica si al menos un turno tiene datos
-            $has_content = array_filter($turnos_a_guardar, function($t) {
-                return !empty($t['titulo']) || !empty($t['contenido']);
-            });
 
-            if (empty($has_content)) {
-                $_SESSION['error'] = "Debe completar al menos un Título y su Contenido.";
+            if (empty($turnos_a_guardar)) {
+                // Si borró todo, guardamos vacío pero sin error
+                $this->examenModel->guardarTurnos([]);
+                $_SESSION['success'] = "Se han eliminado todos los turnos.";
             } else {
                 $resultado = $this->examenModel->guardarTurnos($turnos_a_guardar);
                 if ($resultado !== false) {
-                    $_SESSION['success'] = "Fechas de exámenes actualizadas correctamente.";
+                    $_SESSION['success'] = "Fechas guardadas y ordenadas correctamente.";
                 } else {
-                    $_SESSION['error'] = "Error al guardar las fechas.";
+                    $_SESSION['error'] = "Error al guardar el archivo JSON.";
                 }
             }
         }

@@ -1,0 +1,27 @@
+{
+    "ultima_modificacion": "2025-11-26 14:30:45",
+    "turnos": [
+        {
+            "id": 1,
+            "titulo": "Noviembre",
+            "anio": "2025",
+            "examenes": [
+                {
+                    "fecha": "2025-11-26",
+                    "materia": "Programaci\u00f3n II",
+                    "tribunal": "Herrera Mario, Cuello Walter, Pozyvilko Miriam"
+                },
+                {
+                    "fecha": "2025-11-26",
+                    "materia": "Taller de Programaci\u00f3n II",
+                    "tribunal": "Serrano Rub\u00e9n, Cuello Walter, Barrionuevo Cristian"
+                },
+                {
+                    "fecha": "2025-11-27",
+                    "materia": "Gesti\u00f3n de Proyectos y Software de Calidad ",
+                    "tribunal": "Herrera Mario-Serrano Rub\u00e9n , Balcarce Vanesa"
+                }
+            ]
+        }
+    ]
+}

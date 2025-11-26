@@ -1718,3 +1718,53 @@ body {
     display: none; 
   }
 }
+
+/* --- Estilos para Tablas de Exámenes --- */
+.table-responsive {
+    overflow-x: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: 1px solid #e5e7eb;
+}
+
+.tabla-examenes {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    font-size: 15px;
+    min-width: 600px; /* Fuerza el scroll en móviles si es muy angosta */
+}
+
+.tabla-examenes thead {
+    background-color: var(--primary); /* Azul del sitio */
+    color: white;
+}
+
+.tabla-examenes th, 
+.tabla-examenes td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tabla-examenes th {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+/* Filas alternadas para mejor lectura */
+.tabla-examenes tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.tabla-examenes tbody tr:hover {
+    background-color: #e0f2fe; /* Azul muy clarito al pasar el mouse */
+}
+
+.fecha-destacada {
+    font-weight: 700;
+    color: var(--primary);
+    white-space: nowrap;
+}

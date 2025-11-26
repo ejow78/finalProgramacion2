@@ -1,21 +1,11 @@
-<?php $rol = $_SESSION['rol'] ?? 'comun'; 
-function traducirCarrera($valor) {
-    switch ($valor) {
-        case 'alimentos':
-            return 'Técnico Superior en Agroindustria de los Alimentos';
-        case 'historia':
-            return 'Profesorado de Educación Secundaria en Historia';
-        case 'matematicas':
-            return 'Profesorado de Educación Secundaria en Matemáticas';
-        case 'agropecuaria':
-            return 'Técnico Superior en Gestión de Producción Agropecuaria';
-        case 'software':
-            return 'Técnico Superior en Desarrollo de Software';
-        case 'otro':
-            return 'Otro';
-        default:
-            return ucfirst($valor); 
-    }
+<?php 
+if (session_status() === PHP_SESSION_NONE) session_start();
+$rol = $_SESSION['rol'] ?? 'comun'; 
+$usuario_actual = $_SESSION['usuario'] ?? 'Usuario';
+
+function traducirInteres($valor) {
+    // Reutilizamos la lógica o mostramos directo
+    return ucfirst($valor);
 }
 ?>
 <!DOCTYPE html>
@@ -24,63 +14,65 @@ function traducirCarrera($valor) {
 <meta charset="UTF-8">
 <title>Panel - Mensajes</title>
 <link rel="stylesheet" href="<?php echo ADMIN_URL; ?>estilos.css">
-<style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    .container { width: 95%; margin: auto; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 14px; }
-    th { background-color: #f2f2f2; }
-    .header { display: flex; justify-content: space-between; align-items: center; }
-    .nav-links a { text-decoration: none; padding: 8px 12px; background: #007bff; color: white; border-radius: 4px; margin-left: 10px; }
-    .nav-links a.active { background: #0056b3; }
-    .logout-btn { background-color: #f44336; color: white; padding: 10px 15px; border: none; cursor: pointer; text-decoration: none; border-radius: 4px; }
-    td.mensaje { max-width: 400px; white-space: pre-wrap; word-break: break-word; }
-    .nav-links a.home { background: #030303ff; }
-    .nav-links a.home:hover { background: #000000ff; }
-</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <h2>Listado de Mensajes de Contacto</h2>
-       <div class="nav-links">
-            <a href="<?php echo BASE_URL; ?>index.php" class="home">Volver al Sitio</a>   
-            <a href="index.php?accion=inscripciones" class="active">Inscripciones</a>
-            <a href="index.php?accion=mensajes">Mensajes</a>
-            <a href="<?php echo ADMIN_URL; ?>index.php?accion=logout" class="logout-btn">Cerrar sesión</a>
+    <div class="header-top">
+        <h2>Mensajes</h2>
+        <div class="header-actions">
+            <span class="user-badge"><i class="fas fa-user-circle"></i> <?= htmlspecialchars($usuario_actual) ?></span>
+            <a href="<?php echo BASE_URL; ?>index.php" class="btn-dark" target="_blank">Ver Sitio</a>
+            <a href="<?php echo ADMIN_URL; ?>index.php?accion=logout" class="btn-danger">Salir</a>
         </div>
     </div>
+    <div class="header-tabs">
+        <a href="index.php?accion=inscripciones" class="tab-link">Inscripciones</a>
+        <a href="index.php?accion=mensajes" class="tab-link active">Mensajes</a> <?php if ($rol === 'admin'): ?>
+            <a href="index.php?accion=usuarios" class="tab-link">Usuarios</a>
+            <a href="index.php?accion=formulario_examenes" class="tab-link">Exámenes</a>
+        <?php endif; ?>
+    </div>
+</div>
 
     <?php if (isset($_SESSION['success'])): ?>
-        <div style="color: green; border: 1px solid green; padding: 10px; margin-top: 10px;"><?= htmlspecialchars($_SESSION['success']) ?></div>
+        <div class="alert-success"><?= htmlspecialchars($_SESSION['success']) ?></div>
         <?php unset($_SESSION['success']); ?>
     <?php endif; ?>
 
     <table>
-        <tr>
-            <th>Fecha</th>
-            <th>Nombre y Apellido</th>
-            <th>Email/Teléfono</th>
-            <th>Área de Interés</th>
-            <th>Mensaje</th>
-            <?php if ($rol === 'admin'): ?>
-            <th>Acciones</th>
-            <?php endif; ?>
-        </tr>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Remitente</th>
+                <th>Contacto</th>
+                <th>Interés</th>
+                <th style="width:40%">Mensaje</th>
+                <?php if ($rol === 'admin'): ?>
+                <th>Acciones</th>
+                <?php endif; ?>
+            </tr>
+        </thead>
+        <tbody>
         <?php foreach ($mensajes as $m): ?>
         <tr>
-            <td><?= htmlspecialchars(date("d/m/Y H:i", strtotime($m['creadoa']))) ?></td>
-            <td><?= htmlspecialchars($m['nombre'] . ' ' . $m['apellido']) ?></td>
-            <td><?= htmlspecialchars($m['email']) ?><br><?= htmlspecialchars($m['telefono']) ?></td>
-            <td><?= htmlspecialchars(traducirCarrera($m['interes'])) ?></td>
-            <td class="mensaje"><?= htmlspecialchars($m['mensaje']) ?></td>
+            <td><?= htmlspecialchars(date("d/m/y H:i", strtotime($m['creadoa']))) ?></td>
+            <td><strong><?= htmlspecialchars($m['nombre'] . ' ' . $m['apellido']) ?></strong></td>
+            <td>
+                <?= htmlspecialchars($m['email']) ?><br>
+                <small><?= htmlspecialchars($m['telefono']) ?></small>
+            </td>
+            <td><?= htmlspecialchars(traducirInteres($m['interes'])) ?></td>
+            <td style="white-space: pre-wrap; color: #555;"><?= htmlspecialchars($m['mensaje']) ?></td>
             <?php if ($rol === 'admin'): ?>
-                <td>
-                    <a href="index.php?accion=eliminar_mensaje&id=<?= $m['id'] ?>" onclick="return confirm('¿Eliminar este mensaje?')">Eliminar</a>
+                <td class="actions-cell">
+                    <a href="index.php?accion=eliminar_mensaje&id=<?= $m['id'] ?>" class="delete" onclick="return confirm('¿Eliminar este mensaje?')"><i class="fas fa-trash"></i> Eliminar</a>
                 </td>
             <?php endif; ?>
         </tr>
         <?php endforeach; ?>
+        </tbody>
     </table>
 </div>
 </body>
