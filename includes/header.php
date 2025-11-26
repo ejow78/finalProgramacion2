@@ -29,7 +29,7 @@ require_once __DIR__ . '/config.php';
                         Gestión Académica <i class="fas fa-chevron-down"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo BASE_URL; ?>preinscripcion.php" class="dropdown-link">Pre-Inscripción</a></li>
+                        <li><a href="<?php echo BASE_URL; ?>preinscripcion.php" class="dropdown-link">Preinscripción</a></li>
                         <li><a href="#" class="dropdown-link">Formularios</a></li>
                         <li><a href="<?php echo BASE_URL; ?>fechas_examenes.php " class="dropdown-link">Fechas Exámenes</a></li>
                     </ul>

@@ -34,7 +34,7 @@ $opciones_carrera = [
             <div class="header-actions">
                 <span class="user-badge"><i class="fas fa-user-circle"></i> <?= htmlspecialchars($_SESSION['usuario'] ?? 'Admin') ?></span>
                 <a href="<?php echo BASE_URL; ?>index.php" class="btn-dark" target="_blank">Ver Sitio</a>
-                <a href="<?php echo ADMIN_URL; ?>index.php?accion=logout" class="btn-danger">Salir</a>
+                <a href="<?php echo ADMIN_URL; ?>index.php?accion=logout" class="btn-danger">Cerrar Sesión</a>
             </div>
         </div>
         <div class="header-tabs">

@@ -1769,7 +1769,7 @@ body {
     white-space: nowrap;
 }
 
-/* --- Estilos Públicos Tabla Exámenes --- */
+/* --- Estilos Públicos Tabla Exámenes (Dinámica) --- */
 .exam-table-container {
     background: white;
     border-radius: 12px;
@@ -1782,7 +1782,7 @@ body {
 .exam-header {
     background: var(--primary);
     color: white;
-    padding: 15px 25px;
+    padding: 16px 24px;
     font-size: 18px;
     font-weight: 600;
     display: flex;
@@ -1792,44 +1792,105 @@ body {
 
 .exam-year {
     background: rgba(255,255,255,0.2);
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 0.9em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
 }
 
 .tabla-examenes {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed; /* IMPORTANTE: Fija el ancho de las columnas */
 }
 
 .tabla-examenes th {
-    background-color: #f1f5f9;
-    color: #1f2937;
-    font-weight: 600;
-    padding: 12px 20px;
+    background-color: #f8fafc;
+    color: var(--text-primary);
+    font-weight: 700;
+    padding: 14px 24px;
     text-align: left;
-    border-bottom: 2px solid #e2e8f0;
+    border-bottom: 2px solid #e5e7eb;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
 }
+
+/* Definir anchos de columna para Escritorio */
+.tabla-examenes th:nth-child(1) { width: 15%; } /* Fecha */
+.tabla-examenes th:nth-child(2) { width: 40%; } /* Materia */
+.tabla-examenes th:nth-child(3) { width: 45%; } /* Tribunal */
 
 .tabla-examenes td {
-    padding: 12px 20px;
-    border-bottom: 1px solid #e2e8f0;
-    color: #4b5563;
+    padding: 14px 24px;
+    border-bottom: 1px solid #f1f5f9;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    vertical-align: top; /* Alineación superior para que se vea ordenado */
+    word-wrap: break-word; /* Evita que textos largos rompan la tabla */
 }
 
+.tabla-examenes tr:last-child td { border-bottom: none; }
+
+/* Estilo de la celda de fecha */
 .date-cell {
     font-weight: 700;
     color: var(--primary);
-    background-color: #f8fafc;
+    background-color: #f8fafc; /* Fondo gris suave para la columna fecha */
     border-right: 1px solid #e2e8f0;
-    width: 120px;
     text-align: center;
 }
 
+/* --- RESPONSIVE (Celular) --- */
 @media (max-width: 768px) {
-    .tabla-examenes th { display: none; }
-    .tabla-examenes tr { display: block; border-bottom: 2px solid #e2e8f0; margin-bottom: 10px; }
-    .tabla-examenes td { display: block; text-align: right; padding: 8px 15px; border: none; position: relative; }
-    .tabla-examenes td::before { content: attr(data-label); position: absolute; left: 15px; font-weight: 600; color: #64748b; }
-    .date-cell { text-align: right; background: none; color: var(--primary); width: 100%; border: none; }
+    .exam-header { flex-direction: column; gap: 8px; text-align: center; }
+    
+    .tabla-examenes, 
+    .tabla-examenes tbody, 
+    .tabla-examenes tr, 
+    .tabla-examenes td {
+        display: block; 
+        width: 100%;
+    }
+    
+    .tabla-examenes th { display: none; } /* Ocultar encabezados en móvil */
+    
+    .tabla-examenes tr { 
+        margin-bottom: 15px; 
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    .tabla-examenes td { 
+        text-align: right; 
+        padding: 12px 15px; 
+        border-bottom: 1px solid #f1f5f9; 
+        position: relative;
+        padding-left: 40%; /* Espacio para la etiqueta */
+    }
+    
+    /* Etiquetas tipo "Materia:", "Tribunal:" en móvil */
+    .tabla-examenes td::before { 
+        content: attr(data-label); 
+        position: absolute; 
+        left: 15px; 
+        top: 12px;
+        font-weight: 700; 
+        color: #64748b; 
+        font-size: 0.85em; 
+        text-transform: uppercase; 
+    }
+    
+    /* Ajuste específico para fecha en móvil */
+    .date-cell { 
+        text-align: left; 
+        background: var(--primary); 
+        color: white; 
+        font-weight: bold;
+        border: none;
+        padding-left: 15px;
+    }
+    
+    .date-cell::before { display: none; } /* No mostrar etiqueta "Fecha" */
 }

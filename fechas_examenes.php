@@ -59,6 +59,7 @@ function formatearFecha($fecha) {
                                     $fecha_anterior = '';
                                     foreach ($turno['examenes'] as $ex): 
                                         $fecha_actual = formatearFecha($ex['fecha']);
+                                        // Lógica para no repetir la fecha visualmente
                                         $mostrar_fecha = ($fecha_actual !== $fecha_anterior);
                                         $fecha_anterior = $fecha_actual;
                                     ?>
@@ -66,12 +67,16 @@ function formatearFecha($fecha) {
                                         <td class="date-cell" data-label="Fecha">
                                             <?= $mostrar_fecha ? $fecha_actual : '' ?>
                                         </td>
-                                        <td data-label="Materia"><strong><?= htmlspecialchars($ex['materia']) ?></strong></td>
-                                        <td data-label="Tribunal"><?= htmlspecialchars($ex['tribunal']) ?></td>
+                                        <td data-label="Materia">
+                                            <strong><?= htmlspecialchars($ex['materia']) ?></strong>
+                                        </td>
+                                        <td data-label="Tribunal">
+                                            <?= htmlspecialchars($ex['tribunal']) ?>
+                                        </td>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>
-                            </table>
+                            </table>                            
                             <?php else: ?>
                                 <div style="padding: 20px; text-align: center; color: #64748b;">
                                     Aún no se han cargado las materias para este turno.
