@@ -37,45 +37,45 @@ $rol = $_SESSION['rol'] ?? 'comun';
     <?php endif; ?>
 
     <form action="index.php?accion=guardar_examenes" method="POST" id="formExamenes">
-        <div id="contenedor-turnos"></div>
+        <div id="contenedor-llamados"></div>
 
         <div style="margin-top: 20px; display: flex; gap: 10px;">
-            <button type="button" onclick="agregarTurno()" style="background:#64748b;">+ Agregar Nuevo Llamado</button>
+            <button type="button" onclick="agregarLlamado()" style="background:#64748b;">+ Agregar Nuevo Llamado</button>
             <button type="submit">Guardar Todos los Cambios</button>
         </div>
     </form>
 </div>
 
 <script>
-    let turnosData = <?php echo json_encode($turnos); ?>;
+    let llamadosData = <?php echo json_encode($llamados); ?>;
     
-    if (!turnosData || turnosData.length === 0) {
-        turnosData = [{ titulo: '', anio: new Date().getFullYear(), examenes: [] }];
+   if (!llamadosData || llamadosData.length === 0) {
+        llamadosData = [{ titulo: '', anio: new Date().getFullYear(), examenes: [] }];
     }
 
     function render() {
-        const container = document.getElementById('contenedor-turnos');
+        const container = document.getElementById('contenedor-llamados');
         container.innerHTML = '';
 
-        turnosData.forEach((turno, indexTurno) => {
-            const turnoHtml = document.createElement('div');
-            turnoHtml.className = 'turno-wrapper';
-            turnoHtml.innerHTML = `
-                <button type="button" class="btn-remove-turno" onclick="eliminarTurno(${indexTurno})">
+        llamadosData.forEach((llamado, indexLlamado) => {
+            const llamadoHtml = document.createElement('div');
+            llamadoHtml.className = 'llamado-wrapper'; // Clase CSS renombrada
+            llamadoHtml.innerHTML = `
+                <button type="button" class="btn-remove-llamado" onclick="eliminarLlamado(${indexLlamado})">
                     <i class="fas fa-trash"></i> Eliminar Llamado
                 </button>
                 <div class="form-row-header">
                     <div>
                         <label>Mes</label>
-                        <input type="text" name="turnos[${indexTurno}][titulo]" value="${turno.titulo || ''}" required placeholder="Ej: Julio - Agosto">
+                        <input type="text" name="llamados[${indexLlamado}][titulo]" value="${llamado.titulo || ''}" required placeholder="Ej: Julio - Agosto">
                     </div>
                     <div>
                         <label>Año</label>
-                        <input type="number" name="turnos[${indexTurno}][anio]" value="${turno.anio || new Date().getFullYear()}" required>
+                        <input type="number" name="llamados[${indexLlamado}][anio]" value="${llamado.anio || new Date().getFullYear()}" required>
                     </div>
                 </div>
                 
-                <div class="examenes-list" id="lista-examenes-${indexTurno}">
+                <div class="examenes-list" id="lista-examenes-${indexLlamado}">
                     <div class="examen-header-row">
                         <div>Fecha</div>
                         <div>Materia / Espacio</div>
@@ -83,31 +83,31 @@ $rol = $_SESSION['rol'] ?? 'comun';
                         <div></div>
                     </div>
                 </div>
-                <button type="button" class="btn-add-examen" onclick="agregarExamen(${indexTurno})">
+                <button type="button" class="btn-add-examen" onclick="agregarExamen(${indexLlamado})">
                     <i class="fas fa-plus"></i> Agregar Fecha de Examen
                 </button>
             `;
-            container.appendChild(turnoHtml);
+            container.appendChild(llamadoHtml);
 
-            const listaExamenes = document.getElementById(`lista-examenes-${indexTurno}`);
-            if(turno.examenes && turno.examenes.length > 0) {
-                turno.examenes.forEach((examen, indexExamen) => {
-                    const row = crearFilaExamen(indexTurno, indexExamen, examen);
+            const listaExamenes = document.getElementById(`lista-examenes-${indexLlamado}`);
+            if(llamado.examenes && llamado.examenes.length > 0) {
+                llamado.examenes.forEach((examen, indexExamen) => {
+                    const row = crearFilaExamen(indexLlamado, indexExamen, examen);
                     listaExamenes.appendChild(row);
                 });
             } else {
-                listaExamenes.appendChild(crearFilaExamen(indexTurno, 0, {}));
+                listaExamenes.appendChild(crearFilaExamen(indexLlamado, 0, {}));
             }
         });
     }
 
-    function crearFilaExamen(indexTurno, indexExamen, data) {
+    function crearFilaExamen(indexLlamado, indexExamen, data) {
         const div = document.createElement('div');
         div.className = 'examen-row';
         div.innerHTML = `
-            <input type="date" name="turnos[${indexTurno}][examenes][${indexExamen}][fecha]" value="${data.fecha || ''}">
-            <input type="text" name="turnos[${indexTurno}][examenes][${indexExamen}][materia]" value="${data.materia || ''}" placeholder="Materia">
-            <input type="text" name="turnos[${indexTurno}][examenes][${indexExamen}][tribunal]" value="${data.tribunal || ''}" placeholder="Tribunal">
+            <input type="date" name="llamados[${indexLlamado}][examenes][${indexExamen}][fecha]" value="${data.fecha || ''}">
+            <input type="text" name="llamados[${indexLlamado}][examenes][${indexExamen}][materia]" value="${data.materia || ''}" placeholder="Materia">
+            <input type="text" name="llamados[${indexLlamado}][examenes][${indexExamen}][tribunal]" value="${data.tribunal || ''}" placeholder="Tribunal">
             <button type="button" class="btn-remove-row" onclick="this.parentElement.remove()">
                 <i class="fas fa-times"></i>
             </button>
@@ -115,22 +115,22 @@ $rol = $_SESSION['rol'] ?? 'comun';
         return div;
     }
 
-    function agregarTurno() {
-        turnosData.push({ titulo: '', anio: new Date().getFullYear(), examenes: [] });
+    function agregarLlamado() {
+        llamadosData.push({ titulo: '', anio: new Date().getFullYear(), examenes: [] });
         render();
     }
 
-    function eliminarTurno(index) {
-        if(confirm('¿Estás seguro de eliminar este turno completo?')) {
-            turnosData.splice(index, 1);
+    function eliminarLlamado(index) {
+        if(confirm('¿Estás seguro de eliminar este llamado completo?')) {
+            llamadosData.splice(index, 1);
             render();
         }
     }
 
-    function agregarExamen(indexTurno) {
-        const lista = document.getElementById(`lista-examenes-${indexTurno}`);
+    function agregarExamen(indexLlamado) {
+        const lista = document.getElementById(`lista-examenes-${indexLlamado}`);
         const nuevoIndex = lista.children.length; 
-        lista.appendChild(crearFilaExamen(indexTurno, nuevoIndex, {}));
+        lista.appendChild(crearFilaExamen(indexLlamado, nuevoIndex, {}));
     }
 
     document.addEventListener('DOMContentLoaded', render);

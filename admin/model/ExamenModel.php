@@ -4,41 +4,44 @@ class ExamenModel {
 
     public function __construct() {
         $this->filepath = __DIR__ . '/../data/examenes.json'; 
-        // Asegurar que el directorio de data existe
         if (!is_dir(__DIR__ . '/../data')) {
             mkdir(__DIR__ . '/../data');
         }
     }
 
-    // Obtener todos los turnos
-    public function obtenerTurnos() {
+
+    public function obtenerLlamados() {
         if (!file_exists($this->filepath) || filesize($this->filepath) === 0) {
-            // Estructura inicial con un turno predeterminado
             return [
                 'ultima_modificacion' => date('Y-m-d H:i:s'),
-                'turnos' => [
+                'llamados' => [
                     [
                         'id' => 1,
-                        'titulo' => 'Turno Noviembre/Diciembre',
+                        'titulo' => 'Proximamente',
                         'contenido' => 'Fechas disponibles pronto.'
                     ]
                 ]
             ];
         }
         $data = file_get_contents($this->filepath);
-        return json_decode($data, true);
+        $result = json_decode($data, true);
+        
+        if (isset($result['turnos'])) {
+            $result['llamados'] = $result['turnos'];
+            unset($result['turnos']);
+        }
+        
+        return $result;
     }
 
-    // Guardar todos los turnos
-    public function guardarTurnos(array $turnos) {
-        // Limpiar turnos vacíos (si el título y contenido están vacíos)
-        $turnos_limpios = array_filter($turnos, function($turno) {
-            return !empty($turno['titulo']) || !empty($turno['contenido']);
+    public function guardarLlamados(array $llamados) {
+        $llamados_limpios = array_filter($llamados, function($llamado) {
+            return !empty($llamado['titulo']) || (isset($llamado['examenes']) && !empty($llamado['examenes']));
         });
 
         $data = [
             'ultima_modificacion' => date('Y-m-d H:i:s'),
-            'turnos' => array_values($turnos_limpios) // Reindexar el array
+            'llamados' => array_values($llamados_limpios)
         ];
         return file_put_contents($this->filepath, json_encode($data, JSON_PRETTY_PRINT));
     }

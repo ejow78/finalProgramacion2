@@ -1,11 +1,21 @@
 {
-    "ultima_modificacion": "2025-11-26 14:30:45",
-    "turnos": [
+    "ultima_modificacion": "2025-11-27 10:02:49",
+    "llamados": [
         {
             "id": 1,
             "titulo": "Noviembre",
             "anio": "2025",
             "examenes": [
+                {
+                    "fecha": "2025-11-25",
+                    "materia": "Redes y Seguridad Inform\u00e1tica",
+                    "tribunal": "Rat Jonatan , Collante Cristian, Moreno Cristian"
+                },
+                {
+                    "fecha": "2025-11-25",
+                    "materia": "Laboratorio de Programaci\u00f3n",
+                    "tribunal": "C\u00e1ceres Leonardo, Moreno Cristian , Pozyvilko Miriam"
+                },
                 {
                     "fecha": "2025-11-26",
                     "materia": "Programaci\u00f3n II",
@@ -13,13 +23,13 @@
                 },
                 {
                     "fecha": "2025-11-26",
-                    "materia": "Taller de Programaci\u00f3n II",
-                    "tribunal": "Serrano Rub\u00e9n, Cuello Walter, Barrionuevo Cristian"
+                    "materia": "Base de Datos II",
+                    "tribunal": "Barrionuevo Cristian, , Pozyvilko Miriam, Herrera Mario"
                 },
                 {
-                    "fecha": "2025-11-27",
-                    "materia": "Gesti\u00f3n de Proyectos y Software de Calidad ",
-                    "tribunal": "Herrera Mario-Serrano Rub\u00e9n , Balcarce Vanesa"
+                    "fecha": "2025-11-26",
+                    "materia": "Taller de Programaci\u00f3n II",
+                    "tribunal": "Serrano Rub\u00e9n, Cuello Walter, Barrionuevo Cristian"
                 }
             ]
         }

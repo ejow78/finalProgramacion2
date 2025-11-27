@@ -3,13 +3,14 @@ require __DIR__ . '/includes/config.php';
 require __DIR__ . '/admin/model/ExamenModel.php'; 
 
 if (!class_exists('ExamenModel')) {
-    $data = ['turnos' => []];
+    $data = ['llamados' => []]; 
 } else {
     $examenModel = new ExamenModel();
-    $data = $examenModel->obtenerTurnos();
+    $data = $examenModel->obtenerLlamados();
 }
 
-$turnos_activos = $data['turnos'] ?? [];
+
+$llamados_activos = $data['llamados'] ?? []; 
 $titulo_principal = "Calendario de Mesas de Exámenes";
 
 function formatearFecha($fecha) {
@@ -37,15 +38,15 @@ function formatearFecha($fecha) {
                     <p>Consulta las fechas, materias y tribunales confirmados.</p>
                 </div>
 
-                <?php if (!empty($turnos_activos)): ?>
-                    <?php foreach ($turnos_activos as $turno): ?>
+                <?php if (!empty($llamados_activos)): ?>
+                    <?php foreach ($llamados_activos as $llamado): ?> 
                         <div class="exam-table-container">
                             <div class="exam-header">
-                                <span><i class="fas fa-calendar-alt"></i> <?= htmlspecialchars($turno['titulo']) ?></span>
-                                <span class="exam-year"><?= htmlspecialchars($turno['anio'] ?? date('Y')) ?></span>
+                                <span><i class="fas fa-calendar-alt"></i> Llamado de <?= htmlspecialchars($llamado['titulo']) ?></span>
+                                <span class="exam-year"><?= htmlspecialchars($llamado['anio'] ?? date('Y')) ?></span>
                             </div>
                             
-                            <?php if (!empty($turno['examenes']) && is_array($turno['examenes'])): ?>
+                            <?php if (!empty($llamado['examenes']) && is_array($llamado['examenes'])): ?>
                             <table class="tabla-examenes">
                                 <thead>
                                     <tr>
@@ -57,9 +58,8 @@ function formatearFecha($fecha) {
                                 <tbody>
                                     <?php 
                                     $fecha_anterior = '';
-                                    foreach ($turno['examenes'] as $ex): 
+                                    foreach ($llamado['examenes'] as $ex): 
                                         $fecha_actual = formatearFecha($ex['fecha']);
-                                        // Lógica para no repetir la fecha visualmente
                                         $mostrar_fecha = ($fecha_actual !== $fecha_anterior);
                                         $fecha_anterior = $fecha_actual;
                                     ?>
@@ -79,15 +79,15 @@ function formatearFecha($fecha) {
                             </table>                            
                             <?php else: ?>
                                 <div style="padding: 20px; text-align: center; color: #64748b;">
-                                    Aún no se han cargado las materias para este turno.
+                                    Todavía no se cargaron las materias para este llamado.
                                 </div>
                             <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <div style="text-align: center; padding: 40px; background: white; border-radius: 12px; border: 1px solid #e5e7eb;">
-                        <h3>No hay turnos publicados</h3>
-                        <p>Por favor, vuelve a consultar más tarde.</p>
+                        <h3>No hay llamados publicados</h3>
+                        <p>Por favor, vuelva a consultar más tarde.</p>
                     </div>
                 <?php endif; ?>
             </div>

@@ -9,27 +9,27 @@ class ExamenController {
     }
 
     public function formulario() {
-        $data = $this->examenModel->obtenerTurnos();
-        // Pasamos toda la data de turnos a la vista
-        $turnos = $data['turnos'] ?? [];
+        $data = $this->examenModel->obtenerLlamados(); // Cambiado a obtenerLlamados()
+        // Pasamos toda la data de llamados a la vista
+        $llamados = $data['llamados'] ?? [];
         include __DIR__ . '/../view/examenes/form.php';
     }
 
     public function guardar() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Recibimos el array crudo de turnos desde el formulario dinámico
-            $turnos_input = $_POST['turnos'] ?? [];
+            // Recibimos el array crudo de llamados desde el formulario dinámico
+            $llamados_input = $_POST['llamados'] ?? []; // Cambiado a $_POST['llamados']
 
-            $turnos_a_guardar = [];
+            $llamados_a_guardar = []; // Cambiado a $llamados_a_guardar
             
             // Procesamos y limpiamos los datos
-            foreach ($turnos_input as $index => $t) {
+            foreach ($llamados_input as $index => $l) { // Cambiado a $llamados_input y $l
                 // Solo guardamos si tiene título
-                if (empty($t['titulo'])) continue;
+                if (empty($l['titulo'])) continue;
 
                 $examenes_limpios = [];
-                if (isset($t['examenes']) && is_array($t['examenes'])) {
-                    foreach ($t['examenes'] as $ex) {
+                if (isset($l['examenes']) && is_array($l['examenes'])) {
+                    foreach ($l['examenes'] as $ex) {
                         // Guardamos el examen si tiene al menos materia o fecha
                         if (!empty($ex['materia']) || !empty($ex['fecha'])) {
                             $examenes_limpios[] = [
@@ -46,20 +46,20 @@ class ExamenController {
                     });
                 }
 
-                $turnos_a_guardar[] = [
+                $llamados_a_guardar[] = [ // Cambiado a $llamados_a_guardar
                     'id' => $index + 1,
-                    'titulo' => $t['titulo'],
-                    'anio' => $t['anio'] ?? date('Y'), // Guardamos el año
+                    'titulo' => $l['titulo'],
+                    'anio' => $l['anio'] ?? date('Y'), // Guardamos el año
                     'examenes' => $examenes_limpios // Guardamos la lista de exámenes, no HTML
                 ];
             }
 
-            if (empty($turnos_a_guardar)) {
+            if (empty($llamados_a_guardar)) {
                 // Si borró todo, guardamos vacío pero sin error
-                $this->examenModel->guardarTurnos([]);
-                $_SESSION['success'] = "Se han eliminado todos los turnos.";
+                $this->examenModel->guardarLlamados([]); // Cambiado a guardarLlamados
+                $_SESSION['success'] = "Se han eliminado todos los llamados."; // Mensaje actualizado
             } else {
-                $resultado = $this->examenModel->guardarTurnos($turnos_a_guardar);
+                $resultado = $this->examenModel->guardarLlamados($llamados_a_guardar); // Cambiado a guardarLlamados
                 if ($resultado !== false) {
                     $_SESSION['success'] = "Fechas guardadas y ordenadas correctamente.";
                 } else {
