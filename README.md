@@ -103,6 +103,6 @@ $username = "root";
 $password = ""; 
 $dbname = "ies2";
 ```
-### Autores
-## Ortiz Edgar Javier - Diaz Santiago Agustin
+## Autores
+### Ortiz Edgar Javier - Diaz Santiago Agustin
 
