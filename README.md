@@ -104,5 +104,3 @@ $password = "";
 $dbname = "ies2";
 ```
 
-
-**Autor:** Edgar Javier Ortiz
